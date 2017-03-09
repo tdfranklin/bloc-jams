@@ -30,6 +30,22 @@
      ]
  };
 
+  // My Example Album
+ var albumDanielsen = {
+     title: 'Food Chain',
+     artist: 'Sean Danielsen',
+     label: 'SD',
+     year: '2014',
+     albumArtUrl: 'assets/images/album_covers/food_chain.jpg',
+     songs: [
+         { title: 'Waves', duration: '5:30' },
+         { title: 'Rescue Me', duration: '4:39' },
+         { title: 'Beautiful Things', duration: '5:04'},
+         { title: 'Food Chain', duration: '2:52' },
+         { title: 'Broken Bones and Skeletons', duration: '4:11'}
+     ]
+ };
+
  var createSongRow = function(songNumber, songName, songLength) {
      var template =
         '<tr class="album-view-song-item">'
@@ -64,3 +80,13 @@
  window.onload = function() {
      setCurrentAlbum(albumPicasso);
  };
+
+ document.getElementsByClassName('album-cover-art')[0].addEventListener('click', function(event) {
+     if (document.getElementsByClassName('album-view-artist')[0].firstChild.nodeValue == "Pablo Picasso") {
+         setCurrentAlbum(albumMarconi);
+     } else if (document.getElementsByClassName('album-view-artist')[0].firstChild.nodeValue == "Guglielmo Marconi") {
+         setCurrentAlbum(albumDanielsen);
+     } else {
+         setCurrentAlbum(albumPicasso);
+     }
+ });
