@@ -82,6 +82,40 @@ var createSongRow = function(songNumber, songName, songLength) {
      $('.main-controls .play-pause').html(playerBarPauseButton);     
  };
 
+ var switchSong = function() {
+     var currentSongIndex = trackIndex(currentAlbum, currentSongFromAlbum);
+
+     //console.log($(this));
+     
+     if ($(this) == $nextButton) {
+         currentSongIndex++;
+         if (currentSongIndex >= currentAlbum.songs.length) {
+             currentSongIndex = 0;
+         }
+         var $nextSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
+         $nextSongNumberCell.html(pauseButtonTemplate);
+     } else {
+         currentSongIndex--;
+         if (currentSongIndex < 0) {
+             currentSongIndex = currentAlbum.songs.length -1;
+         }
+         $('.main-controls .play-pause').html(playerBarPauseButton);
+
+         var $previousSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
+         $previousSongNumberCell.html(pauseButtonTemplate);
+     }
+
+     var lastSongNumber = currentlyPlayingSongNumber;
+
+     setSong(currentSongIndex + 1);
+
+     updatePlayerBarSong();
+
+     var $lastSongNumberCell = getSongNumberCell(lastSongNumber);
+     
+     $lastSongNumberCell.html(lastSongNumber);
+ };
+/*
  var nextSong = function() {
      var currentSongIndex = trackIndex(currentAlbum, currentSongFromAlbum);
      currentSongIndex++;
@@ -125,7 +159,7 @@ var createSongRow = function(songNumber, songName, songLength) {
      $previousSongNumberCell.html(pauseButtonTemplate);
      $lastSongNumberCell.html(lastSongNumber);    
  };
-
+*/
  var setSong = function(songNumber) {
      currentlyPlayingSongNumber = parseInt(songNumber);
      currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
@@ -149,6 +183,6 @@ var createSongRow = function(songNumber, songName, songLength) {
 
  $(document).ready(function() {
      setCurrentAlbum(albumPicasso);
-     $previousButton.click(previousSong);
-     $nextButton.click(nextSong);
+     $previousButton.click(switchSong);
+     $nextButton.click(switchSong);
  });
