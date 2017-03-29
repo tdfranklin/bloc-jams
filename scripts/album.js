@@ -85,9 +85,9 @@ var createSongRow = function(songNumber, songName, songLength) {
  var switchSong = function() {
      var currentSongIndex = trackIndex(currentAlbum, currentSongFromAlbum);
 
-     //console.log($(this));
+     console.log($(this));
      
-     if ($(this) == $nextButton) {
+     if ($(this)[0] == $nextButton[0]) {
          currentSongIndex++;
          if (currentSongIndex >= currentAlbum.songs.length) {
              currentSongIndex = 0;
